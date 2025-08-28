@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState, useCallback } from "react";
 import { Input as GeoInput } from "./components/UI/Input/Input";
 import { Button } from "./components/UI/Button.jsx/Button";
+import { TourResults } from "./components/UI/TourResults";
 import { startSearchPrices, getSearchPrices } from "./api";
 
 function App() {
@@ -14,7 +15,6 @@ function App() {
   const [searchResults, setSearchResults] = useState(null);
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
-  console.log({ searchResults });
 
   const MAX_RETRIES = 2;
   // Poll for search results
@@ -187,22 +187,14 @@ function App() {
             </div>
           )}
 
-        {/* Success State - Results will be displayed in the next task */}
+        {/* Tour Results */}
         {searchState === "success" &&
           searchResults &&
           Object.keys(searchResults).length > 0 && (
-            <div
-              style={{
-                color: "#2e7d32",
-                backgroundColor: "#e8f5e8",
-                padding: "20px",
-                borderRadius: "4px",
-                textAlign: "center",
-              }}
-            >
-              Знайдено {Object.keys(searchResults).length} турів! (Результати
-              будуть відображені в наступному завданні)
-            </div>
+            <TourResults
+              searchResults={searchResults}
+              countryId={selected?.id}
+            />
           )}
       </form>
     </>

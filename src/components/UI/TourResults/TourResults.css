@@ -1,0 +1,73 @@
+.tour-results {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.tour-results__container {
+  width: 700px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.tour-results__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.tour-results__loading,
+.tour-results__error,
+.tour-results__empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.tour-results__loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1976d2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.tour-results__error {
+  color: #d32f2f;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 750px) {
+  .tour-results__container {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tour-results__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .tour-results__container {
+    padding: 15px;
+  }
+}
+
+/* Ensure cards don't get too narrow */
+@media (min-width: 600px) and (max-width: 750px) {
+  .tour-results__grid {
+    grid-template-columns: 1fr;
+  }
+}
