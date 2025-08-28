@@ -410,7 +410,12 @@ const getHotels = (countryID) => {
 };
 
 const getHotel = (hotelId) => {
-  const hotel = db.getHotel(hotelId);
+  // Convert hotelId to number for comparison
+  const hotelIdNum = parseInt(hotelId);
+
+  // Get all hotels and find the one with matching ID
+  const allHotels = db.getHotels();
+  const hotel = Object.values(allHotels).find((h) => h.id === hotelIdNum);
 
   if (!hotel) {
     const error = {
@@ -425,7 +430,21 @@ const getHotel = (hotelId) => {
     return Promise.reject(resp);
   }
 
-  const response = new Response(JSON.stringify(hotel), {
+  // Add description and services to the hotel data
+  const hotelWithDetails = {
+    ...hotel,
+    description:
+      "Готель розташований на березі моря. Готель заснований у 1990 році, остання реновація проведена у 2016 році. Затишна зелена територія, комфортабельні номери. Поруч із готелем знаходиться гарна дискотека. Підійде для молоді та сімей з дітьми.",
+    services: {
+      wifi: "yes",
+      aquapark: "none",
+      tennis_court: "yes",
+      laundry: "yes",
+      parking: "yes",
+    },
+  };
+
+  const response = new Response(JSON.stringify(hotelWithDetails), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
