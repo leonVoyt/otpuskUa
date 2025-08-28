@@ -469,4 +469,6 @@ export {
   startSearchPrices,
   getSearchPrices,
   getHotels,
+  getPrice,
+  getHotel,
 };

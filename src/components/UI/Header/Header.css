@@ -1,0 +1,41 @@
+.header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1976d2;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.header__logo:hover {
+  color: #1565c0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header__container {
+    padding: 12px 15px;
+  }
+
+  .header__logo {
+    font-size: 20px;
+  }
+}

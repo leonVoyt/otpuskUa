@@ -1,0 +1,1 @@
+export { TourDetail } from "./TourDetail";

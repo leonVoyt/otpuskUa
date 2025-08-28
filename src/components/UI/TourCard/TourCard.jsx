@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./TourCard.css";
 
 export const TourCard = ({ tour, hotel }) => {
+  const navigate = useNavigate();
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("uk-UA", {
@@ -21,8 +24,7 @@ export const TourCard = ({ tour, hotel }) => {
   };
 
   const handleOpenPrice = () => {
-    // In a real app, this would open a detailed price view or booking form
-    alert(`Відкриваю детальну інформацію про тур: ${hotel.name}`);
+    navigate(`/tour/${tour.id}/${tour.hotelID}`);
   };
 
   return (
