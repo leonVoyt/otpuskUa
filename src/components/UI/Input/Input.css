@@ -1,0 +1,51 @@
+.customInput {
+  position: relative;
+  width: 100%;
+  background-color: #e2e2e2;
+  padding: 16px 24px;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 8px;
+
+  /* position: absolute; */
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.list ul {
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.closeArrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 8px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+.inputWrapper {
+  position: relative;
+}
