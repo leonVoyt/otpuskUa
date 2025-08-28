@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { getCountries, searchGeo } from "../../../api";
 import "./Input.css";
-import { Button } from "../Button.jsx/Button";
 
 export const Input = ({ value, onChange, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +36,6 @@ export const Input = ({ value, onChange, onSelect }) => {
         if (!query) {
           const resp = await getCountries();
           const data = await resp.json();
-          console.log({ data });
 
           const values = Object.values(data).map((c) => ({
             ...c,
@@ -52,7 +50,7 @@ export const Input = ({ value, onChange, onSelect }) => {
           const values = Object.values(data);
           if (active) setOptions(values);
         }
-      } catch (_) {
+      } catch {
         if (active) setOptions([]);
       }
     };
@@ -148,7 +146,6 @@ export const Input = ({ value, onChange, onSelect }) => {
           </ul>
         </div>
       )}
-      <Button text={"Знайти "} type="submit" />
     </div>
   );
 };

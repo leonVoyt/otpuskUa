@@ -463,4 +463,4 @@ const getPrice = (priceId) => {
   return Promise.resolve(response);
 };
 
-export { getCountries, searchGeo };
+export { getCountries, searchGeo, startSearchPrices, getSearchPrices };
