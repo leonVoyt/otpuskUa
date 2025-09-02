@@ -10,17 +10,15 @@ export const TourCard = ({ tour, hotel }) => {
     return date.toLocaleDateString("uk-UA", {
       day: "2-digit",
       month: "2-digit",
-      year: "numeric",
+      year: "2-digit",
     });
   };
 
   const formatPrice = (amount, currency) => {
-    const formatter = new Intl.NumberFormat("uk-UA", {
-      style: "currency",
-      currency: currency === "usd" ? "USD" : "UAH",
-      minimumFractionDigits: 0,
-    });
-    return formatter.format(amount);
+    if (currency === "usd") {
+      return `${amount} USD`;
+    }
+    return `${amount.toLocaleString("uk-UA")} грн`;
   };
 
   const handleOpenPrice = () => {
@@ -37,21 +35,14 @@ export const TourCard = ({ tour, hotel }) => {
         <h3 className="tour-card__hotel-name">{hotel.name}</h3>
 
         <div className="tour-card__location">
-          <span className="tour-card__city">{hotel.cityName}</span>
-          <span className="tour-card__country">{hotel.countryName}</span>
+          <span className="tour-card__city-country">
+            {hotel.cityName}, {hotel.countryName}
+          </span>
         </div>
 
-        <div className="tour-card__dates">
-          <div className="tour-card__date">
-            <span className="tour-card__label">Початок:</span>
-            <span className="tour-card__value">
-              {formatDate(tour.startDate)}
-            </span>
-          </div>
-          <div className="tour-card__date">
-            <span className="tour-card__label">Кінець:</span>
-            <span className="tour-card__value">{formatDate(tour.endDate)}</span>
-          </div>
+        <div className="tour-card__tour-start">
+          <span className="tour-card__label">Старт туру:</span>
+          <span className="tour-card__date">{formatDate(tour.startDate)}</span>
         </div>
 
         <div className="tour-card__price">

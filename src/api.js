@@ -490,4 +490,5 @@ export {
   getHotels,
   getPrice,
   getHotel,
+  stopSearchPrices,
 };

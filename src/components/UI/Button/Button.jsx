@@ -1,11 +1,11 @@
 import React from "react";
-import classes from "./Button.module.css";
+import "./Button.css";
 
 export const Button = ({ type = "button", text, onClick, disabled, style }) => {
   return (
     <button
       type={type}
-      className={classes.button}
+      className={`button ${disabled ? "button--disabled" : ""}`}
       onClick={onClick}
       disabled={disabled}
       style={style}

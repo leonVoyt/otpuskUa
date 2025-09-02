@@ -1,14 +1,16 @@
 .header {
-  background: white;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+  box-shadow: 0 2px 4px var(--color-shadow-light);
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .header__container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 16px 20px;
   display: flex;
@@ -19,17 +21,16 @@
 .header__logo {
   font-size: 24px;
   font-weight: 700;
-  color: #1976d2;
+  color: var(--color-primary);
   cursor: pointer;
   transition: color 0.2s ease;
   user-select: none;
 }
 
 .header__logo:hover {
-  color: #1565c0;
+  color: var(--color-primary-hover);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .header__container {
     padding: 12px 15px;

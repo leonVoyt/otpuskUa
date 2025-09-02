@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
-import { Button } from "../Button.jsx/Button";
+import { Button } from "../UI/Button/Button";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const Header = () => {
     <header className="header">
       <div className="header__container">
         <div className="header__logo" onClick={() => navigate("/")}>
-          🏖️ OtpuskUA
+          🏖️ Otpusk
         </div>
 
         {!isHomePage && (

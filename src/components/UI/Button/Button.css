@@ -1,0 +1,23 @@
+.button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-secondary);
+  color: var(--color-text-white);
+  cursor: pointer;
+  transition: border-color 0.25s;
+  width: 100%;
+}
+
+.button--disabled {
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.button:not(.button--disabled):hover {
+  border-color: var(--color-secondary-hover);
+}

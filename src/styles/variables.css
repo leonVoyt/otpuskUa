@@ -1,0 +1,54 @@
+:root {
+  /* Primary Colors */
+  --color-primary: #1976d2;
+  --color-primary-hover: #1565c0;
+  --color-primary-active: #0d47a1;
+
+  /* Secondary Colors */
+  --color-secondary: #5667fb;
+  --color-secondary-hover: #d6f602;
+
+  /* Background Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #faf8f8;
+  --color-bg-light: #f8f9fa;
+  --color-bg-error: #ffebee;
+  --color-bg-info: #f0f8ff;
+
+  /* Text Colors */
+  --color-text-primary: #333333;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #666666;
+  --color-text-muted: #888888;
+  --color-text-white: #ffffff;
+  --color-text-black: #000000;
+
+  /* Border Colors */
+  --color-border-primary: #e0e0e0;
+  --color-border-secondary: #ddd;
+  --color-border-light: #e9ecef;
+  --color-border-focus: #5667fb;
+
+  /* Status Colors */
+  --color-success: #4caf50;
+  --color-error: #d32f2f;
+  --color-warning: #ff9800;
+  --color-info: #2196f3;
+
+  /* Disabled Colors */
+  --color-disabled-bg: #e0e0e0;
+  --color-disabled-text: #000000;
+
+  /* Shadow Colors */
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-shadow-medium: rgba(0, 0, 0, 0.15);
+
+  /* Gradient Colors */
+  --color-gradient-start: rgba(255, 255, 255, 1);
+  --color-gradient-end: rgba(255, 255, 255, 0);
+
+  /* Scrollbar Colors */
+  --color-scrollbar: #ccc;
+  --color-scrollbar-hover: #999;
+}

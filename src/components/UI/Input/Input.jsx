@@ -5,7 +5,6 @@ import "./Input.css";
 export const Input = ({ value, onChange, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState(value || "");
-
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState(null);
   const containerRef = useRef(null);
@@ -45,7 +44,6 @@ export const Input = ({ value, onChange, onSelect }) => {
         } else {
           const resp = await searchGeo(query);
           const data = await resp.json();
-          console.log({ data, query });
 
           const values = Object.values(data);
           if (active) setOptions(values);
@@ -65,6 +63,8 @@ export const Input = ({ value, onChange, onSelect }) => {
     if (selected) {
       if (selected.type === "country") {
         setQuery("");
+        onChange("");
+        onSelect(null);
       } else {
         setQuery(selected.name);
       }
@@ -98,11 +98,12 @@ export const Input = ({ value, onChange, onSelect }) => {
   };
 
   return (
-    <div ref={containerRef} className="customInput">
-      <p>Форма пошуку турів</p>
-      <div className="inputWrapper">
+    <div ref={containerRef} className="geo-input">
+      <p className="geo-input__title">Форма пошуку турів</p>
+      <div className="geo-input__wrapper">
         <input
           type="text"
+          className="geo-input__field"
           value={query}
           placeholder="Куди летимо?"
           onChange={(e) => {
@@ -111,10 +112,9 @@ export const Input = ({ value, onChange, onSelect }) => {
             setIsOpen(true);
           }}
           onClick={handleInputClick}
-          style={{ width: "100%", padding: "8px 10px" }}
         />
         <span
-          className="closeArrow"
+          className="geo-input__close-btn"
           onClick={() => {
             setQuery("");
             onChange("");
@@ -125,22 +125,17 @@ export const Input = ({ value, onChange, onSelect }) => {
         </span>
       </div>
       {isOpen && list.length > 0 && (
-        <div className="list">
-          <ul>
+        <div className="geo-input__dropdown">
+          <ul className="geo-input__list">
             {list.map((item) => (
               <li
                 key={`${item.type}-${item.id}`}
+                className="geo-input__item"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleSelect(item)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "8px 10px",
-                  cursor: "pointer",
-                }}
               >
                 {renderIcon(item)}
-                <span>{item.name}</span>
+                <span className="geo-input__item-text">{item.name}</span>
               </li>
             ))}
           </ul>

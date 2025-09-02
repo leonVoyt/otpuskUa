@@ -6,33 +6,18 @@
 }
 
 .tour-detail__container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.tour-detail__image {
-  width: 100%;
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.tour-detail__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tour-detail__hotel-info {
-  margin-bottom: 40px;
+.tour-detail__header {
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .tour-detail__hotel-name {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: #333;
   margin: 0 0 16px 0;
@@ -41,20 +26,31 @@
 
 .tour-detail__location {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
   align-items: center;
-}
-
-.tour-detail__city {
-  font-size: 20px;
-  font-weight: 500;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
   color: #555;
 }
 
-.tour-detail__country {
-  font-size: 16px;
-  color: #777;
+.tour-detail__geo-icon,
+.tour-detail__city-icon {
+  font-size: 18px;
+}
+
+.tour-detail__image {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tour-detail__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tour-detail__section-title {
@@ -119,6 +115,14 @@
   color: #2e7d32;
 }
 
+.tour-detail__description {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .tour-detail__description-text {
   font-size: 16px;
   line-height: 1.6;
@@ -126,39 +130,107 @@
   margin: 0;
 }
 
+.tour-detail__services {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tour-detail__services-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
 .tour-detail__services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .tour-detail__service-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px;
+  gap: 8px;
+  padding: 8px 12px;
   background: #f8f9fa;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid #e9ecef;
 }
 
 .tour-detail__service-icon {
-  font-size: 20px;
-  width: 24px;
+  font-size: 16px;
+  width: 20px;
   text-align: center;
 }
 
 .tour-detail__service-name {
-  flex: 1;
   font-size: 14px;
   font-weight: 500;
   color: #333;
 }
 
-.tour-detail__service-status {
-  font-size: 16px;
+.tour-detail__divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 30px 0;
+}
+
+.tour-detail__tour-summary {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tour-detail__date-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-detail__calendar-icon {
+  font-size: 20px;
+}
+
+.tour-detail__date {
+  font-size: 18px;
   font-weight: 600;
-  color: #28a745;
+  color: #333;
+}
+
+.tour-detail__price-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tour-detail__price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.tour-detail__open-price-btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tour-detail__open-price-btn:hover {
+  background: #1565c0;
 }
 
 .tour-detail__loading,
@@ -191,7 +263,6 @@
   }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .tour-detail__container {
     padding: 0 15px;
@@ -202,22 +273,16 @@
   }
 
   .tour-detail__image {
-    height: 300px;
+    height: 100px;
   }
 
-  .tour-detail__tour-info,
-  .tour-detail__description,
-  .tour-detail__services {
-    padding: 20px;
+  .tour-detail__tour-summary {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
   }
 
   .tour-detail__services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .tour-detail__detail-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    justify-content: center;
   }
 }

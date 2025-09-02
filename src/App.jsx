@@ -1,9 +1,9 @@
 import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Header } from "./components/UI/Header";
-import { SearchPage } from "./components/UI/SearchPage";
-import { TourDetail } from "./components/UI/TourDetail";
+import { Header } from "./components/Header";
+import { SearchPage } from "./components/SearchPage";
+import { TourPage } from "./components/TourPage";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<SearchPage />} />
-        <Route path="/tour/:priceId/:hotelId" element={<TourDetail />} />
+        <Route path="/tour/:priceId/:hotelId" element={<TourPage />} />
       </Routes>
     </>
   );

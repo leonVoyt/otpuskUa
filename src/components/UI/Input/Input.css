@@ -1,22 +1,63 @@
-.customInput {
+.geo-input {
   position: relative;
   width: 100%;
-  background-color: #e2e2e2;
   padding: 16px 24px;
   border-radius: 8px;
-
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.list {
+.geo-input__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.geo-input__wrapper {
+  position: relative;
+}
+
+.geo-input__field {
+  width: 100%;
+  height: 32px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-secondary);
+  font-size: 14px;
+  outline: none;
+}
+
+.geo-input__field:focus {
+  border-color: var(--color-border-focus);
+}
+
+.geo-input__close-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 8px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-tertiary);
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
+
+.geo-input__close-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.geo-input__dropdown {
   display: flex;
   flex-direction: column;
   width: 100%;
   border-radius: 8px;
-
-  /* position: absolute; */
   top: 100%;
   left: 0;
   right: 0;
@@ -28,24 +69,28 @@
   z-index: 10;
 }
 
-.list ul {
-  background: white;
-  border-radius: 6px;
-  border: 1px solid #ddd;
+.geo-input__list {
+  background: var(--color-bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--color-border-secondary);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.closeArrow {
-  position: absolute;
+.geo-input__item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  top: 50%;
-  transform: translate(0, -50%);
-  right: 8px;
+  padding: 8px 10px;
   cursor: pointer;
-  width: 16px;
-  height: 16px;
+  transition: background-color 0.2s ease;
 }
-.inputWrapper {
-  position: relative;
+
+.geo-input__item:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.geo-input__item-text {
+  font-size: 14px;
+  color: var(--color-text-primary);
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getPrice, getHotel } from "../../../api";
+import { getPrice, getHotel } from "../../api";
 import "./TourDetail.css";
-import { Button } from "../Button.jsx/Button";
+import { Button } from "../UI/Button/Button";
 
 export const TourDetail = () => {
   const { priceId, hotelId } = useParams();
@@ -19,7 +19,6 @@ export const TourDetail = () => {
         setLoading(true);
         setError(null);
 
-        // Fetch tour and hotel data in parallel
         const [tourResponse, hotelResponse] = await Promise.all([
           getPrice(priceId),
           getHotel(`${hotelId}`),
@@ -27,7 +26,6 @@ export const TourDetail = () => {
 
         const tour = await tourResponse.json();
         const hotel = await hotelResponse.json();
-        console.log({ hotel, hotelId });
 
         setTourData(tour);
         setHotelData(hotel);
@@ -54,20 +52,10 @@ export const TourDetail = () => {
   };
 
   const formatPrice = (amount, currency) => {
-    const formatter = new Intl.NumberFormat("uk-UA", {
-      style: "currency",
-      currency: currency === "usd" ? "USD" : "UAH",
-      minimumFractionDigits: 0,
-    });
-    return formatter.format(amount);
-  };
-
-  const calculateDuration = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const diffTime = Math.abs(end - start);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
+    if (currency === "usd") {
+      return `${amount} USD`;
+    }
+    return `${amount.toLocaleString("uk-UA")} грн`;
   };
 
   const getServiceIcon = (serviceName) => {
@@ -121,60 +109,30 @@ export const TourDetail = () => {
     );
   }
 
-  const duration = calculateDuration(tourData.startDate, tourData.endDate);
-
   return (
     <div className="tour-detail">
       <div className="tour-detail__container">
+        {/* Hotel Information Header */}
+        <div className="tour-detail__header">
+          <h1 className="tour-detail__hotel-name">{hotelData.name}</h1>
+          <div className="tour-detail__location">
+            <span className="tour-detail__geo-icon">📍</span>
+            <span className="tour-detail__country">
+              {hotelData.countryName}
+            </span>
+            <span className="tour-detail__city-icon">🏙️</span>
+            <span className="tour-detail__city">{hotelData.cityName}</span>
+          </div>
+        </div>
+
         {/* Hotel Image */}
         <div className="tour-detail__image">
           <img src={hotelData.img} alt={hotelData.name} />
         </div>
 
-        {/* Hotel Information */}
-        <div className="tour-detail__hotel-info">
-          <h1 className="tour-detail__hotel-name">{hotelData.name}</h1>
-          <div className="tour-detail__location">
-            <span className="tour-detail__city">{hotelData.cityName}</span>
-            <span className="tour-detail__country">
-              {hotelData.countryName}
-            </span>
-          </div>
-        </div>
-
-        {/* Tour Information */}
-        <div className="tour-detail__tour-info">
-          <h2 className="tour-detail__section-title">Інформація про тур</h2>
-          <div className="tour-detail__tour-details">
-            <div className="tour-detail__detail-row">
-              <span className="tour-detail__label">Дата початку:</span>
-              <span className="tour-detail__value">
-                {formatDate(tourData.startDate)}
-              </span>
-            </div>
-            <div className="tour-detail__detail-row">
-              <span className="tour-detail__label">Дата закінчення:</span>
-              <span className="tour-detail__value">
-                {formatDate(tourData.endDate)}
-              </span>
-            </div>
-            <div className="tour-detail__detail-row">
-              <span className="tour-detail__label">Тривалість:</span>
-              <span className="tour-detail__value">{duration} днів</span>
-            </div>
-            <div className="tour-detail__detail-row tour-detail__price-row">
-              <span className="tour-detail__label">Ціна:</span>
-              <span className="tour-detail__price">
-                {formatPrice(tourData.amount, tourData.currency)}
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* Hotel Description */}
         {hotelData.description && (
           <div className="tour-detail__description">
-            <h2 className="tour-detail__section-title">Опис готелю</h2>
             <p className="tour-detail__description-text">
               {hotelData.description}
             </p>
@@ -184,7 +142,7 @@ export const TourDetail = () => {
         {/* Hotel Services */}
         {hotelData.services && (
           <div className="tour-detail__services">
-            <h2 className="tour-detail__section-title">Сервіси та зручності</h2>
+            <h2 className="tour-detail__services-title">Сервіси:</h2>
             <div className="tour-detail__services-grid">
               {Object.entries(hotelData.services).map(
                 ([serviceName, serviceValue]) => (
@@ -195,19 +153,33 @@ export const TourDetail = () => {
                     <span className="tour-detail__service-name">
                       {getServiceLabel(serviceName)}
                     </span>
-                    <span className="tour-detail__service-status">
-                      {serviceValue === "yes"
-                        ? "✓"
-                        : serviceValue === "none"
-                        ? "✗"
-                        : serviceValue}
-                    </span>
                   </div>
                 )
               )}
             </div>
           </div>
         )}
+
+        {/* Divider Line */}
+        <div className="tour-detail__divider"></div>
+
+        {/* Tour Date and Price */}
+        <div className="tour-detail__tour-summary">
+          <div className="tour-detail__date-section">
+            <span className="tour-detail__calendar-icon">📅</span>
+            <span className="tour-detail__date">
+              {formatDate(tourData.startDate)}
+            </span>
+          </div>
+          <div className="tour-detail__price-section">
+            <span className="tour-detail__price">
+              {formatPrice(tourData.amount, tourData.currency)}
+            </span>
+            <button className="tour-detail__open-price-btn">
+              Відкрити ціну
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
