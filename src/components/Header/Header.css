@@ -17,7 +17,9 @@
   align-items: center;
   gap: 20px;
 }
-
+.header__container .button {
+  max-width: 260px;
+}
 .header__logo {
   font-size: 24px;
   font-weight: 700;

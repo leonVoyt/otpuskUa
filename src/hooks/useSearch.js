@@ -132,7 +132,7 @@ export const useSearch = () => {
   );
 
   const startSearch = useCallback(
-    async (countryID) => {
+    async (countryID, hotelID = null, cityID = null) => {
       try {
         if (activeSearchToken.current) {
           await cancelActiveSearch();
@@ -146,7 +146,7 @@ export const useSearch = () => {
         setError(null);
         setRetryCount(0);
 
-        const response = await startSearchPrices(countryID);
+        const response = await startSearchPrices(countryID, hotelID, cityID);
         const data = await response.json();
 
         activeSearchToken.current = data.token;

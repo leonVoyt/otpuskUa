@@ -15,13 +15,13 @@ export const SearchForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!selected || selected.type !== "country") {
-      setError("Будь ласка, виберіть країну для пошуку турів");
+    if (!selected) {
+      setError("Будь ласка, виберіть напрямок: країну, місто або готель");
       return;
     }
 
-    onCountrySelect(selected);
-    onSubmit(selected.id);
+    onCountrySelect(selected.type === "country" ? selected : null);
+    onSubmit(selected);
   };
 
   return (
@@ -41,8 +41,7 @@ export const SearchForm = ({
           searchState === "loading" ||
           searchState === "cancelling" ||
           isCancelling ||
-          !selected ||
-          selected.type !== "country"
+          !selected
         }
       />
     </form>

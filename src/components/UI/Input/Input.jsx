@@ -15,6 +15,8 @@ export const Input = ({ value, onChange, onSelect }) => {
       name: item.name,
       type: item.type,
       flag: item.flag,
+      countryId: item.countryId,
+      cityId: item.cityId,
     }));
   }, [options]);
 
@@ -65,6 +67,7 @@ export const Input = ({ value, onChange, onSelect }) => {
         setQuery("");
         onChange("");
         onSelect(null);
+        setSelected(null);
       } else {
         setQuery(selected.name);
       }
@@ -119,6 +122,7 @@ export const Input = ({ value, onChange, onSelect }) => {
             setQuery("");
             onChange("");
             onSelect(null);
+            setSelected(null);
           }}
         >
           &#215;

@@ -195,7 +195,22 @@ class Search {
   }
 
   getMockPrices(db) {
-    const hotels = db.getHotelsByCountryID(this._params.countryID);
+    let hotels = db.getHotelsByCountryID(this._params.countryID);
+
+    // Filter by specific hotel if provided
+    if (this._params.hotelID) {
+      const hotelIdNum = parseInt(this._params.hotelID);
+      hotels = Object.fromEntries(
+        Object.entries(hotels).filter(([, hotel]) => hotel.id === hotelIdNum)
+      );
+    }
+    // Filter by specific city if provided
+    else if (this._params.cityID) {
+      const cityIdNum = parseInt(this._params.cityID);
+      hotels = Object.fromEntries(
+        Object.entries(hotels).filter(([, hotel]) => hotel.cityId === cityIdNum)
+      );
+    }
 
     return Object.fromEntries(
       Object.entries(hotels).map(([hotelID]) => {
@@ -227,7 +242,14 @@ const searchGeo = (string) => {
 
   const countries = Object.values(db.getCountries()).map(addType("country"));
   const hotels = Object.values(db.getHotels()).map(addType("hotel"));
-  const cities = Object.values(db.getCities()).map(addType("city"));
+
+  // Add countryId to cities based on hotels
+  const cities = Object.values(db.getCities()).map((city) => {
+    const hotel = Object.values(db.getHotels()).find(
+      (h) => h.cityId === city.id
+    );
+    return addType("city")({ ...city, countryId: hotel?.countryId });
+  });
 
   let geo = {};
 
@@ -281,7 +303,7 @@ const searchGeo = (string) => {
   return Promise.resolve(response);
 };
 
-const startSearchPrices = (countryID) => {
+const startSearchPrices = (countryID, hotelID = null, cityID = null) => {
   if (!countryID) {
     const error = {
       code: 400,
@@ -299,7 +321,7 @@ const startSearchPrices = (countryID) => {
   }
 
   const token = generateToken();
-  const search = new Search(token, { countryID });
+  const search = new Search(token, { countryID, hotelID, cityID });
 
   db.addSearch(token, search);
 

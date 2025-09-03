@@ -20,12 +20,33 @@ export const SearchPage = () => {
     setError,
   } = useSearch();
 
-  const handleSearchSubmit = (countryId) => {
+  const handleSearchSubmit = async (selected) => {
+    if (!selected) return;
     if (searchResults && searchResults !== previousResults) {
       setPreviousResults(searchResults);
       setPreviousCountryId(selectedCountry?.id);
     }
-    startSearch(countryId);
+
+    let countryId = null;
+    let hotelID = null;
+    let cityID = null;
+
+    if (selected.type === "country") {
+      countryId = selected.id;
+      setSelectedCountry(selected);
+    } else if (selected.type === "city") {
+      countryId = selected.countryId || null;
+      cityID = selected.id;
+      if (!countryId) return;
+      setSelectedCountry({ id: countryId, type: "country" });
+    } else if (selected.type === "hotel") {
+      countryId = selected.countryId || null;
+      hotelID = selected.id;
+      if (!countryId) return;
+      setSelectedCountry({ id: countryId, type: "country" });
+    }
+
+    if (countryId) startSearch(countryId, hotelID, cityID);
   };
 
   const displayResults =
